@@ -5,7 +5,10 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import SpringCloud.modle.MyTestInfo;
 
 @RestController
 @RefreshScope
@@ -29,5 +32,12 @@ public class HelloController {
     public String say(String message){
     	logger.info("message========="+message);
         return "hi,I am "+name+",my port is :"+port+",your messsage is :"+message;
+    }
+    
+    @RequestMapping(value = "/info")
+    @ResponseBody
+    public MyTestInfo info(String message){
+    	logger.info("message========="+message);
+    	return new MyTestInfo(mytest,name,Integer.parseInt(port));
     }
 }
